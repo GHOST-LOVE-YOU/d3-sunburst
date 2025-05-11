@@ -1,11 +1,11 @@
 const sunburstData = {
-  name: "",
+  name: "PPaMo Bench",
   children: [
     {
       name: "PPaMo-Cap",
       children: [
         {
-          name: "Instrument Playing",
+          name: "Instrument",
           children: [
             { name: "playing violin", value: 1 },
             { name: "...", value: 1 },
@@ -13,7 +13,7 @@ const sunburstData = {
           ],
         },
         {
-          name: "Sports & Recreation",
+          name: "Sports",
           children: [
             { name: "run", value: 1 },
             { name: "...", value: 1 },
@@ -21,7 +21,7 @@ const sunburstData = {
           ],
         },
         {
-          name: "Office/Device Interaction",
+          name: "Device",
           children: [
             { name: "write", value: 1 },
             { name: "...", value: 1 },
@@ -29,7 +29,7 @@ const sunburstData = {
           ],
         },
         {
-          name: "Body Bending",
+          name: "limb",
           children: [
             { name: "kneel", value: 1 },
             { name: "...", value: 1 },
@@ -37,7 +37,7 @@ const sunburstData = {
           ],
         },
         {
-          name: "Fitness/Exercise",
+          name: "Exercise",
           children: [
             { name: "crunch", value: 1 },
             { name: "...", value: 1 },
@@ -54,7 +54,15 @@ const sunburstData = {
       name: "PPaMo-QA",
       children: [
         {
-          name: "Movement-related",
+          name: "Human",
+          children: [
+            { name: "People counting", value: 1 },
+            { name: "....", value: 1 },
+            { name: "People interaction", value: 1 },
+          ],
+        },
+        {
+          name: "Movement",
           children: [
             { name: "Type of movement", value: 1 },
             { name: "Speed or pace", value: 1 },
@@ -65,15 +73,7 @@ const sunburstData = {
           ],
         },
         {
-          name: "Human-related",
-          children: [
-            { name: "People counting", value: 1 },
-            { name: "....", value: 1 },
-            { name: "People interaction", value: 1 },
-          ],
-        },
-        {
-          name: "Camera-related",
+          name: "Camera",
           children: [
             { name: "Camera movement", value: 1 },
             { name: "......", value: 1 },
@@ -81,14 +81,14 @@ const sunburstData = {
           ],
         },
         {
-          name: "Emotion and expression",
+          name: "Emotion",
           children: [
             { name: "Emotions conveyed", value: 1 },
             { name: "Facial expressions", value: 1 },
           ],
         },
         {
-          name: "Environment-related",
+          name: "Env",
           children: [
             { name: "Indoors/outdoors", value: 1 },
             { name: "Environmental influence", value: 1 },

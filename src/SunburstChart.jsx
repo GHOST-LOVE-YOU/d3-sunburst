@@ -40,8 +40,8 @@ const SunburstChart = () => {
       })
       .outerRadius((d) => {
         if (d.depth === 0) return 80;
-        if (d.depth === 1) return 160;
-        if (d.depth === 2) return 240;
+        if (d.depth === 1) return 159;
+        if (d.depth === 2) return 236;
         if (d.depth === 3) return 445;
         return 0;
       })
@@ -115,9 +115,9 @@ const SunburstChart = () => {
       .style("stroke-width", (d) => {
         // 设置边框宽度
         if (d.depth === 0) return 0.5;
-        if (d.depth === 1) return 1;
-        if (d.depth === 2) return 1.5;
-        if (d.depth === 3) return 3;
+        if (d.depth === 1) return 4;
+        if (d.depth === 2) return 4;
+        if (d.depth === 3) return 8;
         return 1; // 默认任何其他深度
       })
       .style("fill-rule", "evenodd");
@@ -158,12 +158,16 @@ const SunburstChart = () => {
       .attr("text-anchor", "middle")
       .text((d) => d.data.name)
       .style("fill", "#000")
-      // 设置字体大小
+      // 设置字体大小和加粗
       .style("font-size", (d) => {
-        if (d.depth === 1) return "12px";
-        if (d.depth === 2) return "10px";
+        if (d.depth === 1) return "20px";
+        if (d.depth === 2) return "13px";
         if (d.depth === 3) return "12px";
         return "10px";
+      })
+      .style("font-weight", (d) => {
+        if (d.depth === 1 || d.depth === 2) return "bold";
+        return "normal";
       })
       .style("pointer-events", "none");
 

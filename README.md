@@ -1,6 +1,6 @@
 # demo
 
-![svgviewer-output(1).png](https://minio-file.rica.nezuko.me/img/2025/05/11/681f8e57c26e4.png)
+![svgviewer-png-output.png](https://minio-file.rica.nezuko.me/img/2025/05/11/6820c0691ee38.png)
 
 # 运行
 
