@@ -1,8 +1,8 @@
 const sunburstData = {
-  name: "PPaMo Bench",
+  name: "KineParse Bench",
   children: [
     {
-      name: "PPaMo-Cap",
+      name: "KineParse-Cap",
       children: [
         {
           name: "Instrument",
@@ -51,7 +51,7 @@ const sunburstData = {
       ],
     },
     {
-      name: "PPaMo-QA",
+      name: "KineParse-QA",
       children: [
         {
           name: "Human",
@@ -97,7 +97,7 @@ const sunburstData = {
       ],
     },
     {
-      name: "PPaMo-Hall",
+      name: "KineParse-Hall",
       children: [
         {
           name: "Motion",

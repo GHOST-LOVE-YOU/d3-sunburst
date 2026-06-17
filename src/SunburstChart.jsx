@@ -59,7 +59,7 @@ const SunburstChart = () => {
       .arc()
       .startAngle((d) => d.x0)
       .endAngle((d) => d.x1)
-      .innerRadius(() => 250)
+      .innerRadius(() => 445)
       .outerRadius(() => extendedRadius);
     const root = d3.hierarchy(sunburstData).sum((d) => d.value || 0);
     const nodes = partition(root).descendants();
@@ -97,7 +97,7 @@ const SunburstChart = () => {
       .attr("class", "background-arc")
       .attr("d", backgroundArc)
       .style("fill", (d, i) => `url(#gradient-${i})`)
-      .style("opacity", 0.6)
+      .style("opacity", 1)
       .style("stroke", "#fff")
       .style("stroke-width", 0.5)
       .style("fill-rule", "evenodd");
@@ -162,11 +162,13 @@ const SunburstChart = () => {
       .style("font-size", (d) => {
         if (d.depth === 1) return "20px";
         if (d.depth === 2) return "13px";
-        if (d.depth === 3) return "12px";
+        if (d.depth === 3) return "14px";
         return "10px";
       })
       .style("font-weight", (d) => {
-        if (d.depth === 1 || d.depth === 2) return "bold";
+        if (d.depth === 1) return 1000;
+        if (d.depth === 2) return 1000;
+        if (d.depth === 3) return 600;
         return "normal";
       })
       .style("pointer-events", "none");
@@ -183,7 +185,7 @@ const SunburstChart = () => {
         margin: 0,
         padding: 0,
         overflow: "hidden",
-        background: "#ffffff",
+        background: "#fff8fb",
       }}
     >
       <svg ref={svgRef}></svg>
@@ -192,4 +194,3 @@ const SunburstChart = () => {
 };
 
 export default SunburstChart;
-

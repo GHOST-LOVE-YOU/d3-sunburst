@@ -3,32 +3,47 @@ import * as d3 from "d3";
 // ---------------------------- 颜色配置 ----------------------------
 // 第1层的基础色
 // const BASE_COLORS = {
-//   "PPaMo-Cap": "#59affa",
-//   "PPaMo-QA": "#8471ef",
-//   "PPaMo-Hall": "#dd4c51",
+//   "KineParse-Cap": "#59affa",
+//   "KineParse-QA": "#8471ef",
+//   "KineParse-Hall": "#dd4c51",
 // };
 
 // const BASE_COLORS = {
-//   "PPaMo-Cap": "#1f5adc",
-//   "PPaMo-QA": "#9452d6",
-//   "PPaMo-Hall": "#ee508b",
+//   "KineParse-Cap": "#1f5adc",
+//   "KineParse-QA": "#9452d6",
+//   "KineParse-Hall": "#ee508b",
 // };
 
 const BASE_COLORS = {
-  // "PPaMo-Cap": "#402ae4",
-  "PPaMo-Cap": "#9452d6",
-  "PPaMo-QA": "#f66584",
-  "PPaMo-Hall": "#f98923",
+  "KineParse-Cap": "#e0bce8",
+  "KineParse-QA": "#ffccd0",
+  "KineParse-Hall": "#f8bcd0",
+};
+
+const BACKGROUND_COLORS = {
+  "KineParse-Cap": "#f8f0f8",
+  "KineParse-QA": "#fff6f7",
+  "KineParse-Hall": "#ffe8f2",
 };
 
 const ROOT_COLOR = "#ffffff"; // 根节点颜色
 
-// 随意调节查看效果
 const COLOR_CONFIG = {
-  level3LightenAmount: 0.2,
-  level2LightenAmount: 0.1,
+  level2LightenRange: [0, 0.08],
+  level3LightenRange: [0.02, 0.22],
 };
 // ------------------------------------------------------------------
+
+const mixWithWhite = (color, amount) =>
+  d3.interpolateRgb(color, "#ffffff")(amount);
+
+const getSiblingLightenAmount = (d, [min, max]) => {
+  const siblings = d.parent?.children || [];
+  const siblingCount = Math.max(siblings.length - 1, 1);
+  const siblingPosition = siblings.indexOf(d);
+
+  return min + ((max - min) * siblingPosition) / siblingCount;
+};
 
 // 根据节点深度和位置计算模态颜色
 export const getModalityColor = (d) => {
@@ -42,40 +57,38 @@ export const getModalityColor = (d) => {
     return BASE_COLORS[d.data.name] || "#ccc";
   }
 
-  let parentColor = d.parent ? getModalityColor(d.parent) : "#ccc";
-  const siblingPosition = d.parent ? d.parent.children.indexOf(d) : 0;
-  // const siblingCount = d.parent ? d.parent.children.length : 1;
-
   // 第3层
   if (d.depth === 3) {
-    return d3
-      .color(parentColor)
-      .brighter(COLOR_CONFIG.level3LightenAmount * (siblingPosition+1));
+    const parentColor = d.parent ? getModalityColor(d.parent) : "#ccc";
+    return mixWithWhite(
+      parentColor,
+      getSiblingLightenAmount(d, COLOR_CONFIG.level3LightenRange),
+    );
   }
 
   // 第2层
   if (d.depth === 2) {
-    return d3
-      .color(parentColor)
-      .brighter(COLOR_CONFIG.level2LightenAmount * (siblingPosition+3));
+    const parentColor = d.parent ? getModalityColor(d.parent) : "#ccc";
+    return mixWithWhite(
+      parentColor,
+      getSiblingLightenAmount(d, COLOR_CONFIG.level2LightenRange),
+    );
   }
+
+  return "#ccc";
 };
 
 // 创建背景弧线的渐变配置
 export const createGradientConfig = (node, index, extendedRadius) => {
-  const baseColor = getModalityColor(node);
+  const baseColor = BACKGROUND_COLORS[node.data.name] || mixWithWhite(getModalityColor(node), 0.9);
 
   return {
     id: `gradient-${index}`,
     stops: [
       { offset: "0%", color: baseColor },
-      { offset: "20%", color: d3.color(baseColor).brighter(10) },
-      { offset: "40%", color: d3.color(baseColor).brighter(2) },
-      { offset: "60%", color: d3.color(baseColor).brighter(3) },
-      { offset: "80%", color: d3.color(baseColor).brighter(4) },
-      { offset: "100%", color: "#ffffff" },
+      { offset: "100%", color: baseColor },
     ],
     radius: extendedRadius,
-    innerRadius: 250,
+    innerRadius: 445,
   };
 };
